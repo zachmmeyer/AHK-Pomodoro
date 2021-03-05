@@ -28,7 +28,7 @@ Return ;finish adding gui, return to idle
 
 ButtonStart:
   Gui, Submit, NoHide ; Save the input from the user to each control's associated variable.
-  if (PomodoroTimeSec < 1) {
+  if (PomodoroTimeSec < 1 & PomodoroTimeMin < 1) {
     Return
   }
   SetTimer, Countdown, 1000 
