@@ -38,20 +38,19 @@ ButtonStart:
 Return
 
 ButtonStop:
-GuiControl, , Pauser, Pause; reset pause just in case
+  GuiControl, , Pauser, Pause; reset pause just in case
 Return
 
-
 ButtonPause:
-If (timerState == true){
-SetTimer, Countdown, Off
-timerState := false ;turn off countdown
-GuiControl, , Pauser, Unpause ; change button to unpause
-}
-else{
-GuiControl, , Pauser, Pause ;set's button to pause, then resumes countdown
-SetTimer, Countdown, 1000 
-}
+  If (timerState == true){
+    SetTimer, Countdown, Off
+    timerState := false ;turn off countdown
+    GuiControl, , Pauser, Unpause ; change button to unpause
+  }
+  else{
+    GuiControl, , Pauser, Pause ;set's button to pause, then resumes countdown
+    SetTimer, Countdown, 1000 
+  }
 Return
 
 Countdown:
@@ -84,3 +83,5 @@ ExitApp
 ;TODO - Play a sound on the completion of any timer
 ;TODO - Default sound should be system beep if no file given
 ;TODO - Update a status file upon completion of any timer to be relevant to the context of said timer. Example: if Study timer finishes, status file should read "Status: Study!"
+;TODO - Save last set numbers and information in a Config file, load up config file on startup
+;TODO - Autogenerate config file?
