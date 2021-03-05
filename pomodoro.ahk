@@ -22,26 +22,40 @@ Gui, Add, Edit
 Gui, Add, UpDown, vBreakTimeSec, 0
 Gui, Add, Button, Default, Start ; The label ButtonStart (if it exists) will be run when the button is pressed.
 Gui, Add, Button, , Stop 
-Gui, Add, Button, , Reset
+Gui, Add, Button,w50 vPauser, Pause ; lets us change button from pause and unpause
 Gui, Show, AutoSize Center, Pomodoro
 Return ;finish adding gui, return to idle
 
 ButtonStart:
   Gui, Submit, NoHide ; Save the input from the user to each control's associated variable.
-  if (PomodoroTimeSec < 1 & PomodoroTimeMin < 1) {
+  if (PomodoroTimeSec < 1 AND PomodoroTimeMin < 1) { ;jfk not &
     Return
   }
+  GuiControl, , Pauser, Pause ;reset pause just in case
   SetTimer, Countdown, 1000 
   mins := PomodoroTimeMin
   secs := PomodoroTimeSec
 Return
 
 ButtonStop:
+GuiControl, , Pauser, Pause; reset pause just in case
 Return
-ButtonReset:
+
+
+ButtonPause:
+If (timerState == true){
+SetTimer, Countdown, Off
+timerState := false ;turn off countdown
+GuiControl, , Pauser, Unpause ; change button to unpause
+}
+else{
+GuiControl, , Pauser, Pause ;set's button to pause, then resumes countdown
+SetTimer, Countdown, 1000 
+}
 Return
 
 Countdown:
+  timerState := true ; Timer is on
   GuiControl, Text, ShowSec, %secs%
   GuiControl, Text, ShowMin, %mins%
   If((secs) < 1){
