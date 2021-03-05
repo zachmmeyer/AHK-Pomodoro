@@ -20,9 +20,11 @@ Gui, Show, AutoSize Center, Pomodoro
 return
 
 GuiClose:
-; ButtonOK:
-;   Gui, Submit ; Save the input from the user to each control's associated variable.
-;   MsgBox You entered "%PomodoroTime%" and "%BreakTime%".
+  ; ButtonOK:
+  ;   Gui, Submit ; Save the input from the user to each control's associated variable.
+  ;   MsgBox You entered "%PomodoroTime%" and "%BreakTime%".
 ExitApp
 
 ^x::ExitApp
+
+; Bingus
