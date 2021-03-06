@@ -4,6 +4,12 @@ SendMode Input ; Recommended for new scripts due to its superior speed and relia
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 
 #SingleInstance, force
+file := File.Open(config.txt, "r`n")
+  FileReadLine, PomodoroTimeMin, config.txt, 1
+  FileReadLine, PomodoroTimeSec, config.txt, 2
+  FileReadLine, BreakTimeMin, config.txt, 3
+  FileReadLine, BreakTimeSec, config.txt, 4
+  ;reads config file and sets last timer settings
 
 Gui, Add, Text,,
 Gui, Add, Text,, Pomodoro Time:
@@ -12,14 +18,14 @@ Gui, Add, Text, w30 vShowMin,
 Gui, Add, Text, w30 vShowSec,
 Gui, add, text, ys, Minutes ;wtf is ys
 Gui, Add, Edit,
-Gui, Add, UpDown, vPomodoroTimeMin, 0 ; The ym option starts a new column of controls.
+Gui, Add, UpDown, vPomodoroTimeMin, %PomodoroTimeMin% ; The ym option starts a new column of controls.
 Gui, Add, Edit
-Gui, Add, UpDown, vBreakTimeMin, 0
+Gui, Add, UpDown, vBreakTimeMin, %BreakTimeMin%
 Gui, add, text, ys, Seconds
 Gui, Add, Edit,
-Gui, Add, UpDown, vPomodoroTimeSec Range0-59, 0
+Gui, Add, UpDown, vPomodoroTimeSec Range0-59, %PomodoroTimeSec%
 Gui, Add, Edit
-Gui, Add, UpDown, vBreakTimeSec, 0
+Gui, Add, UpDown, vBreakTimeSec, %BreakTimeSec%
 Gui, Add, Button, Default, Start ; The label ButtonStart (if it exists) will be run when the button is pressed.
 Gui, Add, Button, , Stop 
 Gui, Add, Button,w50 vPauser, Pause ; lets us change button from pause and unpause
@@ -70,6 +76,13 @@ Countdown:
 Return
 
 GuiClose:
+  Gui, Submit, NoHide
+  file := FileOpen("config.txt", "w`n")
+  File.WriteLine(PomodoroTimeMin)
+  File.WriteLine(PomodoroTimeSec)
+  File.WriteLine(BreakTimeSec)
+  File.WriteLine(BreakTimeSec)
+  File.Close()
 ExitApp
 
 ^i::ExitApp
@@ -84,5 +97,4 @@ ExitApp
 ;TODO - Play a sound on the completion of any timer
 ;TODO - Default sound should be system beep if no file given
 ;TODO - Update a status file upon completion of any timer to be relevant to the context of said timer. Example: if Study timer finishes, status file should read "Status: Study!"
-;TODO - Save last set numbers and information in a Config file, load up config file on startup
 ;TODO - Autogenerate config file?
