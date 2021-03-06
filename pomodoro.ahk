@@ -75,9 +75,10 @@ ExitApp
 
 ^i::ExitApp
 
+
 ;TODO - Label minutes and seconds countdown display on GUI
-;TODO - Should be able to pause timer
-;TODO - Should be able to reset timer
+;TODO - Start button should turn into pause button and unpause button. 
+;TODO - Should be able to reset timer, button should appear after start
 ;TODO - Should be able to store count down value in a text file and update the text file when the value changes
 ;TODO - Once count down is finished, should change to given string, like "Break!" or "Study!" in the same file
 ;TODO - Need one of these for the break time
