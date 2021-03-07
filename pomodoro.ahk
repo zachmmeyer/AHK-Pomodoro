@@ -5,11 +5,11 @@ SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 
 #SingleInstance, force
 file := File.Open(config.txt, "r`n")
-  FileReadLine, PomodoroTimeMin, config.txt, 1
-  FileReadLine, PomodoroTimeSec, config.txt, 2
-  FileReadLine, BreakTimeMin, config.txt, 3
-  FileReadLine, BreakTimeSec, config.txt, 4
-  ;reads config file and sets last timer settings
+FileReadLine, PomodoroTimeMin, config.txt, 1
+FileReadLine, PomodoroTimeSec, config.txt, 2
+FileReadLine, BreakTimeMin, config.txt, 3
+FileReadLine, BreakTimeSec, config.txt, 4
+;reads config file and sets last timer settings
 
 Gui, Add, Text,,
 Gui, Add, Text,, Pomodoro Time:
@@ -86,7 +86,6 @@ GuiClose:
 ExitApp
 
 ^i::ExitApp
-
 
 ;TODO - Label minutes and seconds countdown display on GUI
 ;TODO - Start button should turn into pause button and unpause button. 
