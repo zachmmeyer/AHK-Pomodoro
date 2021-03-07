@@ -12,13 +12,13 @@ FileReadLine, BreakTimeSec, config.txt, 4
 ;reads config file and sets last timer settings
 
 Gui, Add, Text,,
-Gui, Add, Text,, Pomodoro Time:
-Gui, Add, Text,, Break Time:
-Gui, Add, Text, w30 vShowMin,
-Gui, Add, Text, w30 vShowSec,
+Gui, Add, Text, +Right w150, Pomodoro Time:
+Gui, Add, Text, +Right w150, Break Time:
+Gui, Add, Text, w120 vShowMin,
+Gui, Add, Text, w120 vShowSec,
 Gui, add, text, ys, Minutes ;wtf is ys
 Gui, Add, Edit,
-Gui, Add, UpDown, vPomodoroTimeMin, %PomodoroTimeMin% ; The ym option starts a new column of controls.
+Gui, Add, UpDown, vPomodoroTimeMin Range1-1000, %PomodoroTimeMin% ; The ym option starts a new column of controls.
 Gui, Add, Edit
 Gui, Add, UpDown, vBreakTimeMin, %BreakTimeMin%
 Gui, add, text, ys, Seconds
@@ -61,8 +61,8 @@ Return
 
 Countdown:
   timerState := true ; Timer is on
-  GuiControl, Text, ShowSec, %secs%
-  GuiControl, Text, ShowMin, %mins%
+  GuiControl, Text, ShowSec, %secs% Seconds Remaining ;Label for timer display
+  GuiControl, Text, ShowMin, %mins% Minutes Remaining
   If((secs) < 1){
     If(mins < 1){
       SoundPlay, sound.wav
@@ -96,4 +96,3 @@ ExitApp
 ;TODO - Play a sound on the completion of any timer
 ;TODO - Default sound should be system beep if no file given
 ;TODO - Update a status file upon completion of any timer to be relevant to the context of said timer. Example: if Study timer finishes, status file should read "Status: Study!"
-;TODO - Autogenerate config file?
