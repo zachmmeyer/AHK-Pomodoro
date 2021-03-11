@@ -115,7 +115,7 @@ ExitApp
 ;TODO - Start button should turn into pause button and unpause button. 
 ;TODO - Should be able to reset timer, button should appear after start
 ;TODO - Once count down is finished, should change to given string, like "Break!" or "Study!" in the same file
-;TODO - Need one of these for the break time
-;TODO - Play a sound on the completion of break timer.
+;TODO - Need to be able to countdown for breaks as well
+;TODO - Play a sound on the completion of any timer
 ;TODO - Default sound should be system beep if no file given
 ;TODO - Update a status file upon completion of any timer to be relevant to the context of said timer. Example: if Study timer finishes, status file should read "Status: Study!"
