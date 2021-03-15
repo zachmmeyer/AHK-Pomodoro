@@ -11,24 +11,23 @@ FileReadLine, BreakTimeMin, config.txt, 3
 FileReadLine, BreakTimeSec, config.txt, 4
 ;reads config file and sets last timer settings
 
-Gui, Add, Text,,
-Gui, Add, Text, +Right w150, Pomodoro Time:
-Gui, Add, Text, +Right w150, Break Time:
-Gui, Add, Text, w120 vShowMin,
-Gui, Add, Text, w120 vShowSec,
-Gui, add, text, ys, Minutes ;wtf is ys
-Gui, Add, Edit,
+Gui, Add, Text,
+Gui, Add, Text, +Right w90 , Pomodoro Time:
+Gui, Add, Text, +Right w90, Break Time:
+Gui, Add, Text, w100 R2 vShowTime,
+Gui, add, text, ym, Minutes ;wtf is ys
+Gui, Add, Edit, w50
 Gui, Add, UpDown, vPomodoroTimeMin Range0-1000, %PomodoroTimeMin% ; The ym option starts a new column of controls.
-Gui, Add, Edit
+Gui, Add, Edit, w50
 Gui, Add, UpDown, vBreakTimeMin, %BreakTimeMin%
-Gui, add, text, ys, Seconds
-Gui, Add, Edit,
-Gui, Add, UpDown, vPomodoroTimeSec Range0-59, %PomodoroTimeSec%
-Gui, Add, Edit
-Gui, Add, UpDown, vBreakTimeSec, %BreakTimeSec%
 Gui, Add, Button, Default, Start ; The label ButtonStart (if it exists) will be run when the button is pressed.
 Gui, Add, Button, , Stop 
-Gui, Add, Button,w50 vPauser, Pause ; lets us change button from pause and unpause
+Gui, Add, Button, w50 vPauser, Pause ; lets us change button from pause and unpause
+Gui, add, text, ym, Seconds
+Gui, Add, Edit, w50
+Gui, Add, UpDown, vPomodoroTimeSec Range0-59, %PomodoroTimeSec%
+Gui, Add, Edit, w50
+Gui, Add, UpDown, vBreakTimeSec, %BreakTimeSec%
 Gui, Show, AutoSize Center, Pomodoro
 Return ; finish adding gui, return to idle
 
@@ -72,8 +71,7 @@ Return
 Countdown:
   filetimer := FileOpen("timer.txt", "w`n")
   timerState := true ; Timer is on
-  GuiControl, Text, ShowSec, %secs% Seconds Remaining ; Label for timer display
-  GuiControl, Text, ShowMin, %mins% Minutes Remaining
+  GuiControl, Text, ShowTime, % mins ":" secs " Time Remaining"
   If((secs) < 1){
     If(mins < 1){
       ErrorLevel := 0 ; Reset error level before we use it just in case
@@ -94,6 +92,7 @@ Countdown:
 
   if (secs >= 0 and secs < 10) {
     filetimer.WriteLine(mins . ":" . "0" . secs)
+    secs := "0" secs ; leading zero
   }
   Else
     filetimer.WriteLine(mins . ":" . secs)
